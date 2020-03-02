@@ -50,8 +50,10 @@ CREATE TABLE `user` (
   `status` smallint(6) NOT NULL DEFAULT 10,
   `gender` varchar(7) COLLATE utf8_unicode_ci NOT NULL,
   `nationality` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at`TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `filename` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `filepath` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 ~~~
 

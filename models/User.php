@@ -3,6 +3,7 @@
 namespace app\models;
 use Yii;
 use yii\db\ActiveRecord;
+use yii\helpers\Url;
 
 class User extends ActiveRecord implements \yii\web\IdentityInterface
 {
@@ -126,5 +127,23 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
     public function validatePassword($password)
     {
         return Yii::$app->security->validatePassword($password, $this->password_hash);
+    }
+
+
+    public function getPhotoInfo(){
+        $path=Url::to('@webroot/images/');
+        $url=Url::to('@web/images/');
+        $filename=strtolower($this->username).'.jpg';
+        $alt=$this->username."'s Profile Picture";
+        
+        $imageInfo = ['alt'=>$alt];
+        if(file_exists($path.$filename)){
+            $imageInfo['url'] = $url.$filename;            
+        }else{
+            $imageInfo['url'] = $url."user-placeholder.jpg";      
+        }
+        return $imageInfo;
+
+
     }
 }

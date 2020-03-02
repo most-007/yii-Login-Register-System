@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
                         <?= $form->field($model, 'username') ?>
                         <?= $form->field($model, 'email') ?>
-                        <?= $form->field($model, 'password')->passwordInput() ?>
+                        <?= $form->field($model, 'password')->passwordInput()->hint('6 character minimum') ?>
                         <?= $form->field($model, 'mobile') ?>
                         <?= $form->field($model, 'gender')->radioList([
                             'Male' => 'Male',

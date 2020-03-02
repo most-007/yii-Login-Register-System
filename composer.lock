@@ -4,14 +4,14 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "65bf76405f5aa75cd2bc4aca292394ed",
+    "content-hash": "1431aaa18a238d7b0fc9107750514573",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
             "version": "v3.4.1",
             "source": {
                 "type": "git",
-                "url": "git@github.com:twbs/bootstrap.git",
+                "url": "https://github.com/twbs/bootstrap.git",
                 "reference": "68b0d231a13201eb14acd3dc84e51543d16e5f7e"
             },
             "dist": {
@@ -33,7 +33,7 @@
             "version": "3.3.11",
             "source": {
                 "type": "git",
-                "url": "git@github.com:RobinHerbots/Inputmask.git",
+                "url": "https://github.com/RobinHerbots/Inputmask.git",
                 "reference": "5e670ad62f50c738388d4dcec78d2888505ad77b"
             },
             "dist": {
@@ -420,6 +420,55 @@
             "license": [
                 "MIT"
             ]
+        },
+        {
+            "name": "slavkovrn/yii2-lightbox",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SlavKoVrn/yii2-lightbox.git",
+                "reference": "cc2afeccef335c7ca00ce9b277fc7d540cc63ae7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SlavKoVrn/yii2-lightbox/zipball/cc2afeccef335c7ca00ce9b277fc7d540cc63ae7",
+                "reference": "cc2afeccef335c7ca00ce9b277fc7d540cc63ae7",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "~2.0"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "asset-installer-paths": {
+                    "npm-asset-library": "vendor/npm",
+                    "bower-asset-library": "vendor/bower"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "slavkovrn\\lightbox\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Viacheslav Kolesnikov",
+                    "email": "slavko.chita@gmail.com",
+                    "homepage": "http://yii2.kadastrcard.ru"
+                }
+            ],
+            "description": "Yii2 LightBox image galary widget uses Lightbox v2.10.0 by Lokesh Dhakar",
+            "keywords": [
+                "Image galary widget",
+                "jQuery Lightbox v2.10.0 by Lokesh Dhakar",
+                "yii 2",
+                "yii2"
+            ],
+            "time": "2019-02-11T09:08:11+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -4288,7 +4337,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "slavkovrn/yii2-lightbox": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

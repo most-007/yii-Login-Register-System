@@ -15,6 +15,7 @@ AppAsset::register($this);
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
+
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,84 +24,85 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
+
 <body>
-<?php $this->beginBody() ?>
+    <?php $this->beginBody() ?>
 
-<div class="wrap">
-    <?php
-    // NavBar::begin([
-    //     'brandLabel' => Yii::$app->name,
-    //     'brandUrl' => Yii::$app->homeUrl,
-    //     'options' => [
-    //         'class' => 'navbar-inverse navbar-fixed-top',
-    //     ],
-    // ]);
-    
-    ?>
+    <div class="wrap">
+        <?php
+        // NavBar::begin([
+        //     'brandLabel' => Yii::$app->name,
+        //     'brandUrl' => Yii::$app->homeUrl,
+        //     'options' => [
+        //         'class' => 'navbar-inverse navbar-fixed-top',
+        //     ],
+        // ]);
 
-    <?php 
-    NavBar::begin([
-        'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
-        
-    ]);
-    echo Nav::widget([
-        'items' => [
-                    ['label' => 'Home',
-                     'url' => ['/site/index']
-                    ],
-                    // ['label' => 'About',
-                    //  'url' => ['/site/about']
-                    // ],
-                    // ['label' => 'Contact',
-                    //  'url' => ['/site/contact']
-                    // ],
-                 
+        ?>
 
-                     
-                   
-                  
-                    Yii::$app->user->isGuest ? ( 
-                       
-                        ['label' => 'Login', 'url' => ['/site/login']]
-                    ) : (
-                        
-                        [
-                            'label' => Yii::$app->user->identity->username,
-                            'items' => [
-                                 ['label' => 'profile', 'url' => ['/site/profile']],
-                                 ['label' => 'change password', 'url' => ['/site/changePassword']],
-                                 '<div class="dropdown-divider"></div>',
-                                 
-                                 ['label' => 'logout', 
-                                 'url' => ['/site/logout'],
-                                 'linkOptions' => ['data-method' => 'post']]
+        <?php
+        NavBar::begin([
+            'brandLabel' => '<img src="/images/logo.svg" height="28" alt="logo">',
+            'brandUrl' => Yii::$app->homeUrl,
+
+        ]);
+        echo Nav::widget([
+
+            'options' => ['class' => 'navbar navbar-expand-md navbar-light bg-light'],
+
+            'items' => [
+                
+                [
+                    'label' => 'Home',
+                    'url' => ['/site/index']
+                ],
+                // ['label' => 'About',  'options' => ['class' => ['']],
+                //  'url' => ['/site/about']
+                // ],
+                // ['label' => 'Contact',
+                //  'url' => ['/site/contact']
+                // ],
+
+                Yii::$app->user->isGuest ? (['label' => 'Login', 'url' => ['/site/login']]) : ([
+                        'label' => Yii::$app->user->identity->username,
+                        'items' => [
+                            ['label' => 'profile', 'url' => ['/site/profile']],
+                            //  ['label' => 'change password', 'url' => ['/site/changePassword']],
+                            '<div class="dropdown-divider"></div>',
+
+                            [
+                                'label' => 'logout',
+                                'url' => ['/site/logout'],
+                                'linkOptions' => ['data-method' => 'post']
                             ]
                         ]
-                        
-                    )
-        ],
-        'options' => ['class' => 'navbar navbar-expand-md navbar-light bg-light'],
-    ]);
-    NavBar::end();
-    ?>
+                    ])
 
-    <div class="container">
-       
-        <?= Alert::widget() ?>
-        <?= $content ?>
+
+            ],
+
+
+        ]);
+        NavBar::end();
+        ?>
+
+        <div class="container">
+
+            <?= Alert::widget() ?>
+            <?= $content ?>
+        </div>
     </div>
-</div>
 
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+    <footer class="footer">
+        <div class="container">
+            <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
-    </div>
-</footer>
+            <p class="pull-right"><?= Yii::powered() ?></p>
+        </div>
+    </footer>
 
-<?php $this->endBody() ?>
+    <?php $this->endBody() ?>
 </body>
+
 </html>
 <?php $this->endPage() ?>

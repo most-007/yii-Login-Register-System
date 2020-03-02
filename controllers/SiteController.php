@@ -9,7 +9,11 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
-use app\models\SignupForm;  
+use app\models\SignupForm;
+use app\models\UserForm;
+use yii\web\NotFoundHttpException;
+use app\models\User;
+use yii\web\UploadedFile;
 use \yii\helpers\Url;
 
 class SiteController extends Controller
@@ -76,6 +80,7 @@ class SiteController extends Controller
      * @return Response|string
      */
     public function actionLogin() {
+        $this->layout='simple';
        
         if (!\Yii::$app->user->isGuest) {
             return $this->goHome();
@@ -93,7 +98,7 @@ class SiteController extends Controller
 
     public function actionRegister()
     {
-        
+        $this->layout='simple';
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post())) {
             
@@ -110,6 +115,53 @@ class SiteController extends Controller
         ]);
 
     }
+
+    // public function actionUpdate()
+    // {
+    //     $model = User:: findIdentity(Yii::$app->user->identity->id);
+    //    // $model = Posts::findOne(['id'=>$id,'posted_by'=>$user_id]);
+    // //    var_dump($model);
+    // //    die();
+    //     if($model->load(Yii::$app->request->post())){
+    //         // $model->posted_by = Yii::$app->user->identity->getId();
+    //         var_dump($model);
+    //         die();
+    //         if($model->save(false)){
+    //             return $this->redirect(['profile']);
+    //         }
+    //     }
+    //     return $this->render('update',['model'=>$model]);
+    // }
+
+    public function actionUpdate()
+{
+    $id = Yii::$app->user->id;
+    $model = Userform::findModel($id);
+    // $model = $this->findModel($id);
+    // $model->setAttribute('password_hash', null);
+
+    if ($model->load(Yii::$app->request->post())){
+            if(UploadedFile::getInstance($model,'filename')!=null ){
+                $name = UploadedFile::getInstance($model,'filename');
+                $path='images/'.$model->username.'.'.$name->extension;
+                if($name->saveAs($path)){
+                    $model->filename = $model->username.'.'.$name->extension;
+                    $model->filepath= $path;
+                }
+            }
+        ;
+        
+        // $this->_maybe_create_upload_path($path);
+        
+        $model-> update_user();
+        Yii::$app->session->setFlash('success', Yii::t('app', 'Successful update!'));            
+        return $this->redirect(['profile']);
+    } else {
+        return $this->render('update', [
+            'model' => $model,
+        ]);
+    }
+}
 
     /**
      * Logout action.
@@ -156,5 +208,15 @@ class SiteController extends Controller
         return $this->render('profile');
     }
 
+    function _maybe_create_upload_path($path)
+    {
+        if (!file_exists($path)) {
+            mkdir($path, 0755);
+            fopen(rtrim($path, '/') . '/' . 'index.html', 'w');
+        }
+    }
+
     
 }
+
+

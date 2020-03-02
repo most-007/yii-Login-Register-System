@@ -1,129 +1,74 @@
+<?php
+
+use yii\helpers\Html;
+// use yii\bootstrap4\DetailView;
+use yii\widgets\DetailView;
+use slavkovrn\lightbox\LightBoxWidget;
+$photoInfo = Yii::$app->user->identity->PhotoInfo;
+// var_dump($photoInfo);
+$photo = Html::img($photoInfo['url'],['alt'=>$photoInfo['alt']]);
+// $options=['data-lightbox'=>'profile-image','data-title'=>$photoInfo['alt']]
+?>
 <section id="horizontal-form-layouts">
 	<div class="row">
-	    <div class="col-md-12">
-	        <div class="card">
-	            <div class="card-header">
-	                <h4 class="card-title" id="horz-layout-basic">User Info</h4>
-	                <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
-        		
-	            </div>
-	            <div class="card-content collpase show">
-	                <div class="card-body">
+		<div class="col-md-12">
+			<div class="card">
+				<!-- <div class="card-header">
+					<h4 class="card-title" id="horz-layout-basic">User Info</h4>
+					
+				</div> -->
+				<div class="card-content collpase show">
+					<div class="card-body">
 						<div class="card-text">
-							
+							<h1><?= Yii::$app->user->identity->username ?>'s Profile</h1>
 						</div>
-	                    <form class="form form-horizontal form-bordered">
-	                    	<div class="form-body">
-	                    		
-			                    <div class="row">
-	                            	<label class="col-md-3 label-control" for="projectinput1">Username</label>
-		                            <div class="col-md-9 mx-auto">
-		                            	<!-- <input type="text" id="projectinput1" class="form-control" placeholder="First Name" name="fname"> -->
-                                        <label ><?=Yii::$app->user->identity->username;?></label>
-                                    </div>
-		                        </div>
-		                        <div class="row">
-	                            	<label class="col-md-3 label-control" for="projectinput2">gender</label>
-									<div class="col-md-9 mx-auto">
-	                            		<!-- <input type="text" id="projectinput2" class="form-control" placeholder="Last Name" name="lname"> -->
-	                            	<label ><?=Yii::$app->user->identity->gender;?></label>
+						<figure>
+							<!-- <img src="https://cdn4.iconfinder.com/data/icons/linecon/512/photo-512.png" alt="">	 -->
+						
+							<?=
+							LightBoxWidget::widget([
+								'id'     => 'lightbox',  // id of plugin should be unique at page
+								'class'  => 'galary',    // class of plugin to define style
+								'height' => '100px',     // height of image visible in widget
+								'width' => '100px',      // width of image visible in widget
+								'images' => [
+									1 => [
+										'src' => $photoInfo['url'],
+										'title' => $photoInfo['alt']
+									]
 
-                                    </div>
-		                        </div>
+								],
+							]);
+						?>
 
-		                        <div class="form-group row">
-		                            <label class="col-md-3 label-control" for="projectinput3">E-mail</label>
-		                            <div class="col-md-9 mx-auto">
-                                    <label ><?=Yii::$app->user->identity->email;?></label>
-		                            	<!-- <input type="text" id="projectinput3" class="form-control" placeholder="E-mail" name="email"> -->
-		                            </div>
-		                        </div>
+							<figcaption>(click to enlarge)</figcaption>
+						</figure>
+						<!-- <a href="https://cdn4.iconfinder.com/data/icons/linecon/512/photo-512.png" data-lightbox="lightbox" data-title="profile image">
+							<img height="100px" width="100px" src="https://cdn4.iconfinder.com/data/icons/linecon/512/photo-512.png" alt="profile image">
+						</a> -->
+						
+						<?= DetailView::widget([
+							'model' => Yii::$app->user->identity,
+							'attributes' => [
+								'username',
+								'email',
+								'gender',
+								'nationality',
+								'phone'
+							]
+						]) ?>
 
-		                        <div class="form-group row">
-		                            <label class="col-md-3 label-control" for="projectinput4">Contact Number</label>
-		                            <div class="col-md-9 mx-auto">
-		                            	<!-- <input type="text" id="projectinput4" class="form-control" placeholder="Phone" name="phone"> -->
-                                        <label ><?=Yii::$app->user->identity->phone;?></label>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-		                            <label class="col-md-3 label-control" for="projectinput3">Ntionality</label>
-		                            <div class="col-md-9 mx-auto">
-                                    <label ><?=Yii::$app->user->identity->nationality;?></label>
-		                            	<!-- <input type="text" id="projectinput3" class="form-control" placeholder="E-mail" name="email"> -->
-		                            </div>
-		                        </div>
+						<p>
+							<?= Html::a('Update', ['update', 'id' => Yii::$app->user->identity->id], ['class' => 'btn btn-primary']) ?>
 
-								<!-- <h4 class="form-section"><i class="ft-clipboard"></i> Requirements</h4>
-
-		                        <div class="form-group row">
-									<label class="col-md-3 label-control" for="projectinput5">Company</label>
-									<div class="col-md-9 mx-auto">
-		                            	<input type="text" id="projectinput5" class="form-control" placeholder="Company Name" name="company">
-		                            </div>
-		                        </div>
-
-		                        <div class="form-group row">
-		                        	<label class="col-md-3 label-control" for="projectinput6">Interested in</label>
-		                        	<div class="col-md-9 mx-auto">
-			                            <select id="projectinput6" name="interested" class="form-control">
-			                                <option value="none" selected="" disabled="">Interested in</option>
-			                                <option value="design">design</option>
-			                                <option value="development">development</option>
-			                                <option value="illustration">illustration</option>
-			                                <option value="branding">branding</option>
-			                                <option value="video">video</option>
-			                            </select>
-		                            </div>
-		                        </div>
-
-		                        <div class="form-group row">
-		                        	<label class="col-md-3 label-control" for="projectinput7">Budget</label>
-		                        	<div class="col-md-9 mx-auto">
-			                            <select id="projectinput7" name="budget" class="form-control">
-			                                <option value="0" selected="" disabled="">Budget</option>
-			                                <option value="less than 5000$">less than 5000$</option>
-			                                <option value="5000$ - 10000$">5000$ - 10000$</option>
-			                                <option value="10000$ - 20000$">10000$ - 20000$</option>
-			                                <option value="more than 20000$">more than 20000$</option>
-			                            </select>
-		                            </div>
-		                        </div>
-
-								<div class="form-group row">
-									<label class="col-md-3 label-control">Select File</label>
-									<div class="col-md-9 mx-auto">
-										<label id="projectinput8" class="file center-block">
-											<input type="file" id="file">
-											<span class="file-custom"></span>
-										</label>
-									</div>
-								</div>
-
-								<div class="form-group row">
-									<label class="col-md-3 label-control" for="projectinput9">About Project</label>
-									<div class="col-md-9 mx-auto">
-										<textarea id="projectinput9" rows="5" class="form-control" name="comment" placeholder="About Project"></textarea>
-									</div>
-								</div>-->
-							</div> 
-
-	                        <!-- <div class="form-actions">
-	                            <button type="button" class="btn btn-warning mr-1">
-	                            	<i class="ft-x"></i> Cancel
-	                            </button>
-	                            <button type="submit" class="btn btn-primary">
-	                                <i class="la la-check-square-o"></i> Save
-	                            </button>
-	                        </div> -->
-</form>
-	                </div>
-	            </div>
-	        </div>
-	    </div>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 
-	
+
 
 
 

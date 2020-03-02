@@ -34,6 +34,27 @@ DIRECTORY STRUCTURE
 
 
 
+Databse :
+--
+-- Table structure for table `user`
+--
+~~~
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
+  `username` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `auth_key` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `password_hash` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `password_reset_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `phone` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `status` smallint(6) NOT NULL DEFAULT 10,
+  `gender` varchar(7) COLLATE utf8_unicode_ci NOT NULL,
+  `nationality` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at`TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+~~~
+
 REQUIREMENTS
 ------------
 

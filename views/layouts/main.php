@@ -65,6 +65,7 @@ AppAsset::register($this);
 
                 Yii::$app->user->isGuest ? (['label' => 'Login', 'url' => ['/site/login']]) : ([
                         'label' => Yii::$app->user->identity->username,
+                        
                         'items' => [
                             ['label' => 'profile', 'url' => ['/site/profile']],
                             //  ['label' => 'change password', 'url' => ['/site/changePassword']],
